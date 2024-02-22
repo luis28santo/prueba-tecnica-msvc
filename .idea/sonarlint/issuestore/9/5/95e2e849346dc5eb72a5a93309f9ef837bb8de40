@@ -1,0 +1,8 @@
+
+g	java:S112*"FDefine and throw a dedicated exception instead of using a generic one.(´³¥àùÿÿÿÿ8İäÆğÜ1
+g	java:S1126"FDefine and throw a dedicated exception instead of using a generic one.(ëùµüıÿÿÿÿ8ÌôÇğÜ1
+b	java:S112D"FDefine and throw a dedicated exception instead of using a generic one.(Æ»‘Ê8ë¹ĞğÜ1
+r
+java:S6809A"UCall transactional methods via an injected dependency instead of directly via 'this'.(•ùÛ½8¶¦ÂğÜ1
+]
+java:S1128"@Remove this unused import 'javax.swing.text.html.parser.Entity'.(Û‡Ğ‘8¤áññÜ1
