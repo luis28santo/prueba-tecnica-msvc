@@ -1,6 +1,6 @@
 
-g	java:S112)"FDefine and throw a dedicated exception instead of using a generic one.(´³¥àùÿÿÿÿ8İäÆğÜ1
-g	java:S1125"FDefine and throw a dedicated exception instead of using a generic one.(ëùµüıÿÿÿÿ8ÌôÇğÜ1
-b	java:S112C"FDefine and throw a dedicated exception instead of using a generic one.(Æ»‘Ê8ë¹ĞğÜ1
+g	java:S112)"FDefine and throw a dedicated exception instead of using a generic one.(´³¥àùÿÿÿÿ8ë¹ĞğÜ1
+g	java:S1125"FDefine and throw a dedicated exception instead of using a generic one.(ëùµüıÿÿÿÿ8¯§Éİ1
+b	java:S112C"FDefine and throw a dedicated exception instead of using a generic one.(Æ»‘Ê8óÿ¨Éİ1
 r
 java:S6809@"UCall transactional methods via an injected dependency instead of directly via 'this'.(•ùÛ½8¶¦ÂğÜ1

@@ -11,6 +11,7 @@ import org.luisangel.msvcoperation.services.MovementService;
 import org.luisangel.msvcoperation.services.MovementServiceImpl;
 import org.luisangel.msvcoperation.webClient.ClientService;
 import org.luisangel.msvcoperation.webClient.ClientServiceImpl;
+import org.springframework.boot.autoconfigure.web.WebProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -21,6 +22,11 @@ public class PersistenceConfig {
 
     private final AccountRepository accountRepository;
     private final MovementRepository movementRepository;
+
+    @Bean
+    public WebProperties.Resources resources() {
+        return new WebProperties.Resources();
+    }
 
     @Bean
     WebClient webClient() {

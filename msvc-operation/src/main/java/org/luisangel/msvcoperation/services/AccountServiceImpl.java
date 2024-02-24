@@ -2,6 +2,7 @@ package org.luisangel.msvcoperation.services;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.luisangel.msvcoperation.exception.CustomException;
 import org.luisangel.msvcoperation.models.dto.AccountRequest;
 import org.luisangel.msvcoperation.models.dto.AccountResponse;
 import org.luisangel.msvcoperation.models.dto.ClientDto;
@@ -10,6 +11,7 @@ import org.luisangel.msvcoperation.models.entity.Account;
 import org.luisangel.msvcoperation.models.enums.AccountTypeEnum;
 import org.luisangel.msvcoperation.repositories.AccountRepository;
 import org.luisangel.msvcoperation.webClient.ClientService;
+import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -37,7 +39,7 @@ public class AccountServiceImpl implements AccountService {
         return existAccount.flatMap(exist -> {
             log.info("Existe numero de cuenta: {}", exist);
             if (exist) {
-                return Mono.error(new Exception("El numero de la cuenta ya esta registrado."));
+                return Mono.error(new CustomException(HttpStatus.BAD_REQUEST.value(), "El numero de la cuenta ya esta registrado."));
             }
 
             return responseMono.flatMap(client -> {
@@ -64,12 +66,12 @@ public class AccountServiceImpl implements AccountService {
 
         return existAccount.flatMap(account -> {
             if (!account) {
-                return Mono.error(new Exception("Cuenta no encontrada en el sistema."));
+                return Mono.error(new CustomException(HttpStatus.NOT_FOUND.value(), "Cuenta no encontrada en el sistema."));
             }
 
             return existNumAccount.flatMap(numberAccount -> {
                 if (numberAccount) {
-                    return Mono.error(new Exception("El numero de la cuenta ya esta registrada en el sistema."));
+                    return Mono.error(new CustomException(HttpStatus.BAD_REQUEST.value(), "El numero de la cuenta ya esta registrada en el sistema."));
                 }
 
                 return accountRepository.save(requestAccount);
@@ -83,7 +85,7 @@ public class AccountServiceImpl implements AccountService {
         Mono<Account> accountMono = accountRepository.findById(id);
 
         return accountMono
-                .switchIfEmpty(Mono.error(new Exception("Cuenta no encontrada en el sistema.")))
+                .switchIfEmpty(Mono.error(new CustomException(HttpStatus.NOT_FOUND.value(), "Cuenta no encontrada en el sistema.")))
                 .flatMap(account ->
                         accountRepository.save(
                                         account.toBuilder().status(0).build()
@@ -96,7 +98,7 @@ public class AccountServiceImpl implements AccountService {
     public Mono<AccountResponse> getById(Long id) {
 
         return accountRepository.findById(id)
-                .switchIfEmpty(Mono.error(new Exception("Cuenta no encontrada en el sistema.")))
+                .switchIfEmpty(Mono.error(new CustomException(HttpStatus.NOT_FOUND.value(), "Cuenta no encontrada en el sistema.")))
                 .flatMap(account ->
                         clientService.getClientData(account.getClientId())
                                 .map(clientResponse -> {

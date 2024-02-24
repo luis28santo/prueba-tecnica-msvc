@@ -95,8 +95,6 @@ Tmsvc-operation/src/main/java/org/luisangel/msvcoperation/models/entity/Movement
 Š
 Zmsvc-operation/src/main/java/org/luisangel/msvcoperation/beanConfig/PersistenceConfig.java,e\d\edc9153d4190c3cbb444b7c1c224d1d62e90d491
 Š
-Zmsvc-operation/src/main/java/org/luisangel/msvcoperation/controller/AccountController.java,6\3\63acec872cdc565a6238ea870d87f3fb54f69ad1
-Š
 Zmsvc-operation/src/main/java/org/luisangel/msvcoperation/services/MovementServiceImpl.java,f\1\f1ba5b9b31ea3c16f9d015b49c6816c1fd873060
 ‰
 Ymsvc-operation/src/main/java/org/luisangel/msvcoperation/services/AccountServiceImpl.java,8\d\8decfcabfcf1e8c84f1aad05e61646135cccb9b9
@@ -140,7 +138,15 @@ Smsvc-operation/src/main/java/org/luisangel/msvcoperation/router/MovementRouter.
 [msvc-operation/src/main/java/org/luisangel/msvcoperation/models/enums/MovementTypeEnum.java,b\6\b62c8eb3abfae077aa466055775bd9d84d9cc1a3
 ‘
 amsvc-operation/src/main/java/org/luisangel/msvcoperation/models/dto/MovementFullDataResponse.java,4\1\41e45c01268fac6633f4d987485d852a219621e3
-s
-Cmsvc-operation/src/main/java/org/luisangel/msvcoperation/Dockerfile,b\b\bbeb6f76706977621f2b6dcb5903bf9a2a60da31
 €
 Pmsvc-operation/src/main/java/org/luisangel/msvcoperation/util/DateFormatApp.java,d\9\d9a2a150f539fbf9466533f46d66c88ea52f4a14
+H
+msvc-usuarios/Dockerfile,d\e\de40dde59f25d8bcce2561fd6e1df3af43f1c2ba
+I
+msvc-operation/Dockerfile,e\6\e62796585c583ca61c85bb65727f17b6ee318645
+‡
+Wmsvc-operation/src/main/java/org/luisangel/msvcoperation/exception/CustomException.java,5\7\57b9aae89e54b13a124c50b7930f98e684b06c10
+ˆ
+Xmsvc-operation/src/main/java/org/luisangel/msvcoperation/exception/CustomAttributes.java,7\b\7b84cc4b6c38393ec707a5d0ef8bdfcbec49b21b
+Ž
+^msvc-operation/src/main/java/org/luisangel/msvcoperation/exception/GlobalExceptionHandler.java,2\8\28f3fc764108da80bfd4bbd0c8f2b0fb122ea66d

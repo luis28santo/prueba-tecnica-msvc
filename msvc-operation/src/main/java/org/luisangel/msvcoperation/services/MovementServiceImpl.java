@@ -2,6 +2,7 @@ package org.luisangel.msvcoperation.services;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.luisangel.msvcoperation.exception.CustomException;
 import org.luisangel.msvcoperation.models.dto.*;
 import org.luisangel.msvcoperation.models.entity.Account;
 import org.luisangel.msvcoperation.models.entity.Movement;
@@ -10,6 +11,7 @@ import org.luisangel.msvcoperation.repositories.AccountRepository;
 import org.luisangel.msvcoperation.repositories.MovementRepository;
 import org.luisangel.msvcoperation.util.DateFormatApp;
 import org.luisangel.msvcoperation.webClient.ClientService;
+import org.springframework.http.HttpStatus;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -43,13 +45,13 @@ public class MovementServiceImpl implements MovementService {
             log.info("entrando a proceso flatmap");
             if (!exist) {
                 log.error("Cuenta no encontrada en sistema.");
-                return Mono.error(new Exception("Cuenta no encontrada en sistema."));
+                return Mono.error(new CustomException(HttpStatus.NOT_FOUND.value(), "Cuenta no encontrada en sistema."));
             }
 
             return accountActive.flatMap(active -> {
                 if (!active) {
                     log.error("Cuenta inhabilitada en sistema.");
-                    return Mono.error(new Exception("Cuenta inhabilitada en sistema."));
+                    return Mono.error(new CustomException(HttpStatus.BAD_REQUEST.value(), "Cuenta inhabilitada en sistema."));
                 }
 
                 return movementMono.hasElement().flatMap(existMovement -> {
@@ -73,21 +75,21 @@ public class MovementServiceImpl implements MovementService {
         return existMovement.flatMap(movementBd -> {
 
             if (Objects.isNull(movementBd)) {
-                return Mono.error(new Exception("No existe movimiento."));
+                return Mono.error(new CustomException(HttpStatus.NOT_FOUND.value(), "No existe movimiento."));
             }
 
             double regularizedBalance = movementBd.getBalance().doubleValue() - movementBd.getAmount().doubleValue();
 
             if ((regularizedBalance + request.getAmount().doubleValue()) < 0) {
                 log.info("Validacion: Existe movimiento && no hay saldo");
-                return Mono.error(new Exception("La cuenta no tiene el saldo suficiente."));
+                return Mono.error(new CustomException(HttpStatus.BAD_REQUEST.value(), "La cuenta no tiene el saldo suficiente."));
             }
 
             return movementMono.flatMap(lastMovement -> {
 
                 if (!lastMovement.getId().equals(request.getId())) {
                     log.info("Validacion: No actualizar movimientos pasados");
-                    return Mono.error(new Exception("Solo es posible actualizar el ultimo movimiento del cliente."));
+                    return Mono.error(new CustomException(HttpStatus.BAD_REQUEST.value(), "Solo es posible actualizar el ultimo movimiento del cliente."));
                 }
 
                 Movement newMovement = requestMovement(regularizedBalance, request.getAmount().doubleValue(), movementBd.getAccountId());
@@ -123,7 +125,7 @@ public class MovementServiceImpl implements MovementService {
 
         if ((balanceAccount + requestAmount) < 0) {
             log.error("Validacion: No existe movimiento && no hay saldo");
-            return Mono.error(new Exception("LA cuenta no tiene el saldo suficiente."));
+            return Mono.error(new CustomException(HttpStatus.BAD_REQUEST.value(),"LA cuenta no tiene el saldo suficiente."));
         }
 
         log.error("Validacion: No existe movimiento && existe saldo suficiente");
@@ -137,7 +139,7 @@ public class MovementServiceImpl implements MovementService {
 
         if ((balanceMovement + amountRequest) < 0) {
             log.info("Validacion: Existe movimiento && no hay saldo");
-            return Mono.error(new Exception("La cuenta no tiene el saldo suficiente."));
+            return Mono.error(new CustomException(HttpStatus.BAD_REQUEST.value(),"La cuenta no tiene el saldo suficiente."));
         }
 
         log.info("Validacion: Existe movimiento && existe saldo");
