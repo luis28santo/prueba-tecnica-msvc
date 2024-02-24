@@ -150,3 +150,5 @@ Wmsvc-operation/src/main/java/org/luisangel/msvcoperation/exception/CustomExcept
 Xmsvc-operation/src/main/java/org/luisangel/msvcoperation/exception/CustomAttributes.java,7\b\7b84cc4b6c38393ec707a5d0ef8bdfcbec49b21b
 Ž
 ^msvc-operation/src/main/java/org/luisangel/msvcoperation/exception/GlobalExceptionHandler.java,2\8\28f3fc764108da80bfd4bbd0c8f2b0fb122ea66d
+N
+prueba.postman_collection.json,d\b\db01efdf232e07ae10276cd4532ae3298735b3bc
