@@ -17,6 +17,7 @@
 
     <modules>
         <module>msvc-usuarios</module>
+        <module>msvc-operation</module>
     </modules>
 
     <dependencies>

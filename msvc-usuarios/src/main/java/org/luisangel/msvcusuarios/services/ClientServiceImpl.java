@@ -9,7 +9,6 @@ import org.luisangel.msvcusuarios.repositories.ClientRepository;
 import org.luisangel.msvcusuarios.repositories.PersonRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -74,7 +73,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     private Client createAndUpdateCliente(CreateClientDto clientDto, Long personId, Long clientId) {
-        Person person = EntityMapper.dtoToPerson(clientDto);
+        Person person = EntityMapper.clientDtoToPerson(clientDto);
 
         if (!Objects.isNull(personId)) person.setId(personId);
 
